@@ -92,7 +92,8 @@ export default function DashboardPage() {
           production traffic.
         </p>
         <p>
-          Built by <strong>Aniket Ghavte</strong> · <a href="https://aniketghavte.xyz">aniketghavte.xyz</a>
+          Built by <strong>Aniket Ghavte</strong> · <a href="https://aniketghavte.xyz">aniketghavte.xyz</a> ·{' '}
+          <a href="https://github.com/aniketghavte/Distributed-Job-Queue-Task-Runner">GitHub</a>
         </p>
       </section>
 

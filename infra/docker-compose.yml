@@ -1,0 +1,102 @@
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - '6379:6379'
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_data:/data
+
+  api:
+    build:
+      context: ..
+      dockerfile: apps/api/Dockerfile
+    ports:
+      - '3001:3001'
+    environment:
+      REDIS_HOST: redis
+      PORT: '3001'
+    depends_on:
+      - redis
+
+  worker-email:
+    build:
+      context: ..
+      dockerfile: apps/workers/Dockerfile
+    command: ['node', 'dist/emailWorker.js']
+    environment:
+      REDIS_HOST: redis
+      WORKER_METRICS_PORT: '9101'
+    ports:
+      - '9101:9101'
+    depends_on:
+      - redis
+
+  worker-image:
+    build:
+      context: ..
+      dockerfile: apps/workers/Dockerfile
+    command: ['node', 'dist/imageWorker.js']
+    environment:
+      REDIS_HOST: redis
+      WORKER_METRICS_PORT: '9102'
+    ports:
+      - '9102:9102'
+    depends_on:
+      - redis
+
+  worker-ai:
+    build:
+      context: ..
+      dockerfile: apps/workers/Dockerfile
+    command: ['node', 'dist/aiWorker.js']
+    environment:
+      REDIS_HOST: redis
+      WORKER_METRICS_PORT: '9103'
+    ports:
+      - '9103:9103'
+    depends_on:
+      - redis
+
+  dashboard:
+    build:
+      context: ..
+      dockerfile: apps/dashboard/Dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      INTERNAL_API_URL: http://api:3001
+      NEXT_PUBLIC_WS_URL: ws://localhost:3001/live
+    depends_on:
+      - api
+
+  prometheus:
+    image: prom/prometheus:v2.55.1
+    ports:
+      - '9090:9090'
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    depends_on:
+      - api
+      - worker-email
+      - worker-image
+      - worker-ai
+
+  grafana:
+    image: grafana/grafana:11.3.0
+    ports:
+      - '3002:3000'
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_USERS_DEFAULT_THEME: dark
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - prometheus
+
+volumes:
+  redis_data:
+  grafana_data:

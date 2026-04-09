@@ -1,0 +1,29 @@
+{
+  "name": "@repo/workers",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev:email": "tsx watch src/emailWorker.ts",
+    "dev:image": "tsx watch src/imageWorker.ts",
+    "dev:ai": "tsx watch src/aiWorker.ts",
+    "start:email": "node dist/emailWorker.js",
+    "start:image": "node dist/imageWorker.js",
+    "start:ai": "node dist/aiWorker.js",
+    "clean": "rimraf dist",
+    "lint": "tsc --noEmit",
+    "test": "node -e \"process.exit(0)\""
+  },
+  "dependencies": {
+    "@repo/metrics": "*",
+    "@repo/queue-config": "*",
+    "bullmq": "^5.34.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "rimraf": "^6.0.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

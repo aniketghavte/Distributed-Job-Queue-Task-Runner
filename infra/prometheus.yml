@@ -1,0 +1,24 @@
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+
+scrape_configs:
+  - job_name: bullmq-api
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['api:3001']
+
+  - job_name: worker-email
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['worker-email:9101']
+
+  - job_name: worker-image
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['worker-image:9102']
+
+  - job_name: worker-ai
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['worker-ai:9103']

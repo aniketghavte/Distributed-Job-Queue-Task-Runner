@@ -26,7 +26,20 @@ This project demonstrates:
 
 ## Repository structure
 
-```text apps/   api/          Express API + WebSocket + metrics endpoint   workers/      Email/Image/AI worker processes   dashboard/    Next.js monitoring dashboard packages/   queue-config/ Shared Redis and queue definitions   metrics/      Shared Prometheus metric registry infra/   docker-compose.yml   prometheus.yml   grafana/ ```
+```text
+distributed-job-queue/
+├── apps/
+│   ├── api/                # Express API + WebSocket + metrics endpoint
+│   ├── workers/            # Email/Image/AI worker processes
+│   └── dashboard/          # Next.js monitoring dashboard
+├── packages/
+│   ├── queue-config/       # Shared Redis and queue definitions
+│   └── metrics/            # Shared Prometheus metric registry
+└── infra/
+    ├── docker-compose.yml
+    ├── prometheus.yml
+    └── grafana/
+```
 
 ## API features
 
@@ -50,27 +63,48 @@ This project demonstrates:
 
 1. Install dependencies:
 
-```bash npm install ```
+```bash
+npm install
+```
 
 2. Build the workspace:
 
-```bash npm run build ```
+```bash
+npm run build
+```
 
 3. Start Redis:
 
-```bash docker run -d --name djq-redis -p 6379:6379 redis:7-alpine ```
+```bash
+docker run -d --name djq-redis -p 6379:6379 redis:7-alpine
+```
 
 4. Start services in separate terminals:
 
-```bash # Terminal 1 - API npm run start -w @repo/api ```
+```bash
+# Terminal 1 - API
+npm run start -w @repo/api
+```
 
-```bash # Terminal 2 - Worker email npm run start:email -w @repo/workers ```
+```bash
+# Terminal 2 - Worker email
+npm run start:email -w @repo/workers
+```
 
-```bash # Terminal 3 - Worker image npm run start:image -w @repo/workers ```
+```bash
+# Terminal 3 - Worker image
+npm run start:image -w @repo/workers
+```
 
-```bash # Terminal 4 - Worker AI npm run start:ai -w @repo/workers ```
+```bash
+# Terminal 4 - Worker AI
+npm run start:ai -w @repo/workers
+```
 
-```bash # Terminal 5 - Dashboard npm run start -w @repo/dashboard ```
+```bash
+# Terminal 5 - Dashboard
+npm run start -w @repo/dashboard
+```
 
 5. Open these URLs:
 
@@ -82,7 +116,9 @@ This project demonstrates:
 
 Run Redis, API, workers, dashboard, Prometheus, and Grafana:
 
-```bash docker compose -f infra/docker-compose.yml up --build ```
+```bash
+docker compose -f infra/docker-compose.yml up --build
+```
 
 Then open:
 
@@ -107,11 +143,21 @@ Important variables:
 
 ## Development commands
 
-```bash npm run build npm run lint npm run test npm run dev:api npm run dev:dashboard ```
+```bash
+npm run build
+npm run lint
+npm run test
+npm run dev:api
+npm run dev:dashboard
+```
 
 Worker dev mode:
 
-```bash npm run dev:email -w @repo/workers npm run dev:image -w @repo/workers npm run dev:ai -w @repo/workers ```
+```bash
+npm run dev:email -w @repo/workers
+npm run dev:image -w @repo/workers
+npm run dev:ai -w @repo/workers
+```
 
 ## Security and reliability practices
 
@@ -123,6 +169,6 @@ Worker dev mode:
 - Failed-job retention for debugging
 - Metrics for throughput, latency, queue depth, retries
 
-## Portfolio / resume highlight
+## Portfolio and resume highlight
 
 Built a production-style distributed job queue platform using BullMQ and Redis with multi-queue workers, retries with exponential backoff, real-time monitoring, and Prometheus/Grafana observability.

@@ -110,6 +110,60 @@ export default function DashboardPage() {
         </p>
       </header>
 
+      <section className="panel card architecture-story">
+        <details>
+          <summary>
+            <span>Click here to see the architecture and story</span>
+            <span className="summary-hint">How it works · Why it matters · Why I built this</span>
+          </summary>
+
+          <div className="story-content">
+            <pre className="flow-diagram">
+{`Client / Dashboard
+       |
+       | HTTP + WebSocket
+       v
+API (Express + BullMQ Producer)
+       |
+       v
+Redis Queue (email / image / ai)
+       |
+       v
+Workers (email, image, ai)
+       |
+       v
+Prometheus --> Grafana`}
+            </pre>
+
+            <p>
+              If I explain this like I am talking to you directly: this system is built so the app does not freeze
+              when heavy work comes in. Instead of doing everything in one API request, I push jobs to queues and let
+              background workers process them safely.
+            </p>
+            <p>
+              <strong>How it works:</strong> the API receives a task, validates it, and puts it in Redis via BullMQ.
+              Dedicated workers pick jobs by queue type (email, image, AI), execute them with retries and backoff, and
+              report status. The dashboard shows current queue health and live events.
+            </p>
+            <p>
+              <strong>How it benefits:</strong> fast user response times, better reliability when failures happen,
+              safer retry behavior, and clear visibility through metrics. This is the same mindset used in real
+              product teams when they handle async workloads.
+            </p>
+            <p>
+              <strong>What makes it different and unique:</strong> this is not just a basic queue demo. It combines
+              multi-queue processing, real-time event streaming, observability with Prometheus/Grafana, and a polished
+              monitoring UI in one system.
+            </p>
+            <p>
+              <strong>Why I made this:</strong> I wanted to showcase real backend engineering ownership end-to-end, not
+              only API coding. This project demonstrates how I design systems that are scalable, observable, and ready
+              for production-style traffic patterns.
+            </p>
+          </div>
+        </details>
+      </section>
+
       {error && (
         <p style={{ color: 'var(--err)', marginBottom: '1rem' }} role="alert">
           {error}

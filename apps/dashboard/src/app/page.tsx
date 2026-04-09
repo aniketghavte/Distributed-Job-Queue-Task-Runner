@@ -86,16 +86,26 @@ export default function DashboardPage() {
 
   return (
     <main className="shell">
+      <section className="demo-banner">
+        <p>
+          <strong>Product demo only:</strong> This is a portfolio showcase build and is not intended for heavy
+          production traffic.
+        </p>
+        <p>
+          Built by <strong>Aniket Ghavte</strong> · <a href="https://aniketghavte.xyz">aniketghavte.xyz</a>
+        </p>
+      </section>
+
       <nav className="nav">
         <Link href="/">Overview</Link>
         <Link href="/metrics">Observability</Link>
       </nav>
 
       <header className="hero">
-        <h1>Queue dashboard</h1>
+        <h1>Distributed Job Queue Platform</h1>
         <p>
-          Live counts for email, image, and AI workers backed by BullMQ and Redis. Submit jobs via the API or the
-          quick actions below.
+          A minimal, production-style async processing system using BullMQ and Redis. Monitor queue health, trigger
+          jobs, and watch live worker events in one place.
         </p>
       </header>
 
@@ -111,13 +121,38 @@ export default function DashboardPage() {
         ))}
       </div>
 
+      <section className="panel feature-grid">
+        <article className="card feature-card">
+          <h3>What this demo shows</h3>
+          <p>
+            Decoupling heavy tasks from request-response flows so APIs stay responsive while workers process jobs in
+            the background.
+          </p>
+        </article>
+        <article className="card feature-card">
+          <h3>Queues and workers</h3>
+          <p>
+            Separate queues for <strong>email</strong>, <strong>image</strong>, and <strong>AI</strong> with retries,
+            progress updates, and queue-specific concurrency controls.
+          </p>
+        </article>
+        <article className="card feature-card">
+          <h3>Observability</h3>
+          <p>
+            Metrics are exported to Prometheus and visualized in Grafana for throughput, queue depth, latency, and
+            retry behavior.
+          </p>
+        </article>
+      </section>
+
       <section className="panel card">
-        <h3>Quick submit (demo)</h3>
+        <h3>Quick submit actions</h3>
+        <p className="subtle">Use these actions to generate queue traffic and see real-time updates below.</p>
         <QuickSubmit onSubmitted={() => void fetchStats()} />
       </section>
 
       <section className="panel">
-        <h3 style={{ fontSize: '0.9rem', color: 'var(--muted)' }}>WebSocket /live</h3>
+        <h3 style={{ fontSize: '0.9rem', color: 'var(--muted)' }}>Live event stream · WebSocket `/live`</h3>
         <div className="live" aria-live="polite">
           {live.length === 0 ? (
             <div className="evt">Waiting for queue events…</div>

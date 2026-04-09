@@ -1,6 +1,7 @@
 :root {
   --bg: #0c0f14;
   --surface: #141a22;
+  --surface-soft: #161e29;
   --border: #243044;
   --text: #e8edf4;
   --muted: #8b9cb3;
@@ -41,6 +42,28 @@ main.shell {
   padding: 2rem 1.5rem 4rem;
 }
 
+.demo-banner {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+  padding: 0.85rem 1rem;
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.1), rgba(56, 189, 248, 0.03));
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 12px;
+}
+
+.demo-banner p {
+  margin: 0;
+  color: #cde8f8;
+  font-size: 0.86rem;
+}
+
+.demo-banner a {
+  color: #8dd4ff;
+}
+
 .hero {
   margin-bottom: 2rem;
 }
@@ -66,10 +89,11 @@ main.shell {
 }
 
 .card {
-  background: var(--surface);
+  background: linear-gradient(180deg, var(--surface), var(--surface-soft));
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 1.25rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
 }
 
 .card h2 {
@@ -112,6 +136,31 @@ main.shell {
 .panel h3 {
   margin: 0 0 1rem;
   font-size: 1rem;
+}
+
+.subtle {
+  color: var(--muted);
+  margin: -0.4rem 0 1rem;
+  font-size: 0.9rem;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.feature-card h3 {
+  margin: 0 0 0.55rem;
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+.feature-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+  font-size: 0.9rem;
 }
 
 .form-row {
@@ -197,7 +246,7 @@ button:disabled {
 .nav {
   display: flex;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
   font-size: 0.9rem;
 }
 

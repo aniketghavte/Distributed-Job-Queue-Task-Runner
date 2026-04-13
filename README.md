@@ -1,5 +1,7 @@
 # Distributed Job Queue and Task Runner
 
+<video src="https://github-production-user-asset-6210df.s3.amazonaws.com/104782783/577586880-48a4cb13-b5d5-47c1-a4f5-78fd0095d688.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20260413%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260413T193255Z&X-Amz-Expires=300&X-Amz-Signature=5cdbd68e2703e26d2039ab9c26b2c8e970f5d155e05f14ac403dcced778ae617&X-Amz-SignedHeaders=host&response-content-type=video%2Fmp4" width="100%" controls autoplay loop></video>
+
 Production-style distributed job processing system built with Node.js, TypeScript, BullMQ, Redis, and Next.js.
 
 ## Why this project
